@@ -43,6 +43,27 @@ Funcion promedio = CalcularPromedio(sumaInversiones, sumaInversionistas)
     FinSi
 FinFuncion
 
+Funcion validarNumero = ValidarEsNumeroValido(opcionTexto)
+	Definir digitosPermitidos Como Caracteres;
+	Definir validarNumero Como Logico;
+	Definir i, j Como Entero;
+	
+	digitosPermitidos = "1234567890"; // inicializo cadena con los digitos permitidos a evaluar
+	
+	Para i = 0 Hasta Longitud(opcionTexto) Hacer
+		validarNumero = Falso;
+		Para j = 0 Hasta Longitud(digitosPermitidos) Hacer
+			Si Subcadena(opcionTexto, i, j) = Subcadena(digitosPermitidos, j, j) Entonces
+				validarNumero = Verdadero;
+				j = Longitud(digitosPermitidos); // rompo el bucle interno al alcanzar un valor coincidente
+			FinSi
+		FinPara
+		Si No validarNumero Entonces
+			i = Longitud(opcionTexto);  // rompo el bucle externo
+		FinSi
+	FinPara
+FinFuncion
+
 SubProceso Inicializa_matrices(CI, CM, matriz_inversiones, matriz_inversionistas)
 	Definir i, j Como Entero;
 	Para i = 0 Hasta CI-1 Con Paso 1 Hacer
@@ -189,17 +210,11 @@ SubProceso Presenta_datos_meses(CI, CM, matriz_inversiones, matriz_inversionista
 FinSubProceso
 
 Proceso InversionesTotales
-    Definir CI, CM Como Entero;
-    Definir inicializado Como Logico;
-    Definir matriz_inversiones, matriz_inversionistas Como Entero;
+    Definir CI, CM, i, j, matriz_inversiones, matriz_inversionistas Como Entero;
+    Definir inicializado, esNumero Como Logico;
     Definir opcionTexto como Cadena;
+	
     inicializado = Falso;
-	
-    Definir digitosPermitidos Como Caracteres;
-    Definir esNumero Como Logico;
-    Definir i, j Como Entero;
-	
-    digitosPermitidos = "12345"; // inicializo cadena con los digitos permitidos a evaluar
 	
     Repetir
         Escribir "Digite cantidad de Tipos de escolaridad que se van a procesar (1-7): " Sin Saltar;
@@ -223,21 +238,24 @@ Proceso InversionesTotales
         Escribir "4. Salir";
         Leer opcionTexto;
 		
-        esNumero = Verdadero;
+		// Esto lo moví a una función ValidarEsNumeroValido
+//        esNumero = Verdadero;
 		
         // verifico si la opción ingresada contiene solo dígitos permitidos
-        Para i = 0 Hasta Longitud(opcionTexto) Hacer
-            esNumero = Falso;
-            Para j = 0 Hasta Longitud(digitosPermitidos) Hacer
-                Si Subcadena(opcionTexto, i, j) = Subcadena(digitosPermitidos, j, j) Entonces
-                    esNumero = Verdadero;
-                    j = Longitud(digitosPermitidos); // rompo el bucle interno al alcanzar un valor coincidente
-                FinSi
-            FinPara
-            Si No esNumero Entonces
-                i = Longitud(opcionTexto);  // rompo el bucle externo
-            FinSi
-        FinPara
+//        Para i = 0 Hasta Longitud(opcionTexto) Hacer
+//            esNumero = Falso;
+//            Para j = 0 Hasta Longitud(digitosPermitidos) Hacer
+//                Si Subcadena(opcionTexto, i, j) = Subcadena(digitosPermitidos, j, j) Entonces
+//                    esNumero = Verdadero;
+//                    j = Longitud(digitosPermitidos); // rompo el bucle interno al alcanzar un valor coincidente
+//                FinSi
+//            FinPara
+//            Si No esNumero Entonces
+//                i = Longitud(opcionTexto);  // rompo el bucle externo
+//            FinSi
+//        FinPara
+		
+		esNumero = ValidarEsNumeroValido(opcionTexto);
 		
         Si esNumero Entonces
             Segun ConvertirANumero(opcionTexto) Hacer
