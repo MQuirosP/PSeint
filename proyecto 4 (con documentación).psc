@@ -69,18 +69,18 @@ Funcion validarNumero = ValidarEsNumeroValido(opcionTexto)  // recibe una cadena
 FinFuncion
 
 // método para asignar valores aleatorios a las matrices
-SubProceso Inicializa_matrices(CI, CM, matriz_inversiones, matriz_inversionistas)
+SubProceso InicializaMatrices(CI, CM, matrizInversiones, matrizInversionistas)
 	Definir i, j Como Entero;
 	Para i = 0 Hasta CI-1 Con Paso 1 Hacer
 		Para j = 0 Hasta CM-1 Con Paso 1 Hacer
-			matriz_inversiones[i, j] = Aleatorio(1, 800);
-			matriz_inversionistas[i, j] = Aleatorio(1, 30);
+			matrizInversiones[i, j] = Aleatorio(1, 800);
+			matrizInversionistas[i, j] = Aleatorio(1, 30);
 		FinPara
 	FinPara
 FinSubProceso
 
 // método para presentar en pantalla las matrices con sus primeros datos
-SubProceso Presenta_datos_matrices(nombreMatriz, CI, CM, matriz)  // recibe una cadena (titulo), cantidades de filas y columnas y una matriz
+SubProceso PresentaDatosMatrices(nombreMatriz, CI, CM, matriz)  // recibe una cadena (titulo), cantidades de filas y columnas y una matriz
 	Definir i, j Como Entero;
 	Escribir "Datos de la matriz ", nombreMatriz, ":";
 	// titulos columnas (meses)
@@ -105,9 +105,10 @@ SubProceso Presenta_datos_matrices(nombreMatriz, CI, CM, matriz)  // recibe una 
 		FinPara
 		Escribir "";
 	FinPara
+	Escribir "";
 FinSubProceso
 
-SubProceso Presenta_inversiones_acumuladas_por_mes_por_escolaridad(CI, CM, matriz_inversiones)
+SubProceso PresentaInversionesAcumuladasPorMesPorEscolaridad(CI, CM, matrizInversiones)
 	Definir i, j Como Entero;
 	Escribir "Inversiones acumuladas por mes por escolaridad:";
 	// titulos columnas (meses)
@@ -120,21 +121,22 @@ SubProceso Presenta_inversiones_acumuladas_por_mes_por_escolaridad(CI, CM, matri
 	Para i = 0 Hasta CI-1 Hacer
 		Escribir Sin Saltar ObtieneNombreEscolaridad(i+1), " ";
 		Para j = 0 Hasta CM-1 Hacer
-			Si matriz_inversiones[i, j] < 10 Entonces
-				Escribir Sin Saltar matriz_inversiones[i, j], "   ";
+			Si matrizInversiones[i, j] < 10 Entonces
+				Escribir Sin Saltar matrizInversiones[i, j], "   ";
 			SiNo
-				Si matriz_inversiones[i, j] < 100 Entonces
-					Escribir Sin Saltar matriz_inversiones[i, j], "  ";
+				Si matrizInversiones[i, j] < 100 Entonces
+					Escribir Sin Saltar matrizInversiones[i, j], "  ";
 				SiNo
-					Escribir Sin Saltar matriz_inversiones[i, j], " ";
+					Escribir Sin Saltar matrizInversiones[i, j], " ";
 				FinSi
 			FinSi
 		FinPara
 		Escribir "";
 	FinPara
+	Escribir "";
 FinSubProceso
 
-SubProceso Presenta_inversionistas_por_escolaridad_por_mes(CI, CM, matriz_inversionistas)
+SubProceso PresentaInversionistasPorEscolaridadPorMes(CI, CM, matrizInversionistas)
 	Definir i, j Como Entero;
 	Escribir "Cantidad de inversionistas por escolaridad por mes:";
 	// titulos columnas (meses)
@@ -147,10 +149,10 @@ SubProceso Presenta_inversionistas_por_escolaridad_por_mes(CI, CM, matriz_invers
 	Para i = 0 Hasta CI-1 Hacer
 		Escribir Sin Saltar ObtieneNombreEscolaridad(i+1), " ";
 		Para j = 0 Hasta CM-1 Hacer
-			si matriz_inversionistas[i,j] < 10 Entonces
-				Escribir Sin Saltar matriz_inversionistas[i, j], "   ";
+			si matrizInversionistas[i,j] < 10 Entonces
+				Escribir Sin Saltar matrizInversionistas[i, j], "   ";
 			SiNo
-				Escribir Sin Saltar matriz_inversionistas[i, j], "  ";
+				Escribir Sin Saltar matrizInversionistas[i, j], "  ";
 			FinSi
 			
 		FinPara
@@ -158,7 +160,7 @@ SubProceso Presenta_inversionistas_por_escolaridad_por_mes(CI, CM, matriz_invers
 	FinPara
 FinSubProceso
 
-SubProceso Presenta_reporte_inversiones_acumuladas_por_escolaridad(CI, CM, matriz_inversiones, matriz_inversionistas)
+SubProceso PresentaReporteInversionesAcumuladasPorEscolaridad(CI, CM, matrizInversiones, matrizInversionistas)
 	Definir i, j, sumaInversionesEscolaridad, sumaInversionistasEscolaridad Como Entero;
 	Definir promedioInversionesEscolaridad Como Real;
 	Dimension sumaInversionesEscolaridad[CI];
@@ -169,8 +171,8 @@ SubProceso Presenta_reporte_inversiones_acumuladas_por_escolaridad(CI, CM, matri
 		sumaInversionesEscolaridad[i] = 0;
 		sumaInversionistasEscolaridad[i] = 0;
 		Para j = 0 Hasta CM-1 Hacer
-			sumaInversionesEscolaridad[i] = sumaInversionesEscolaridad[i] + matriz_inversiones[i, j];
-			sumaInversionistasEscolaridad[i] = sumaInversionistasEscolaridad[i] + matriz_inversionistas[i, j];
+			sumaInversionesEscolaridad[i] = sumaInversionesEscolaridad[i] + matrizInversiones[i, j];
+			sumaInversionistasEscolaridad[i] = sumaInversionistasEscolaridad[i] + matrizInversionistas[i, j];
 		FinPara
 		promedioInversionesEscolaridad[i] = CalcularPromedio(sumaInversionesEscolaridad[i], sumaInversionistasEscolaridad[i]);
 	FinPara
@@ -182,7 +184,7 @@ SubProceso Presenta_reporte_inversiones_acumuladas_por_escolaridad(CI, CM, matri
 	FinPara
 FinSubProceso
 
-SubProceso Presenta_datos_meses(CI, CM, matriz_inversiones, matriz_inversionistas)
+SubProceso PresentaDatosMeses(CI, CM, matrizInversiones, matrizInversionistas)
 	Definir i, j, sumaInversionesMes, sumaInversionistasMes Como Entero;
 	Definir promedioInversionesMes Como Real;
 	Dimension sumaInversionesMes[CM];
@@ -194,8 +196,8 @@ SubProceso Presenta_datos_meses(CI, CM, matriz_inversiones, matriz_inversionista
 		sumaInversionesMes[j] = 0;
 		sumaInversionistasMes[j] = 0;
 		Para i = 0 Hasta CI-1 Hacer
-			sumaInversionesMes[j] = sumaInversionesMes[j] + matriz_inversiones[i, j];
-			sumaInversionistasMes[j] = sumaInversionistasMes[j] + matriz_inversionistas[i, j];
+			sumaInversionesMes[j] = sumaInversionesMes[j] + matrizInversiones[i, j];
+			sumaInversionistasMes[j] = sumaInversionistasMes[j] + matrizInversionistas[i, j];
 		FinPara
 		promedioInversionesMes[j] = CalcularPromedio(sumaInversionesMes[j], sumaInversionistasMes[j]);
 	FinPara
@@ -217,7 +219,7 @@ FinSubProceso
 
 // proceso principal que solo se encarga de presentar el menu y procesar segùn la opcion seleccionada por el usuario
 Proceso InversionesTotales
-    Definir CI, CM, i, j, matriz_inversiones, matriz_inversionistas Como Entero;
+    Definir CI, CM, i, j, matrizInversiones, matrizInversionistas Como Entero;
 	//CI = Niveles Escolaridad, CM = Cantidad Meses, i-j = variables para recorridos
     Definir inicializado, esNumero Como Logico; // Flags lógicos para validar paso 1 y si la opción es seleccion valida
     Definir opcionTexto como Cadena;  // Variable para almacenar la selección del usuario
@@ -236,8 +238,8 @@ Proceso InversionesTotales
     Hasta Que CM > 0 Y CM <= 12;
 	
 	//  Dimensiono las filas y columnas de las matrices
-    Dimension matriz_inversiones[CI, CM];
-    Dimension matriz_inversionistas[CI, CM];
+    Dimension matrizInversiones[CI, CM];
+    Dimension matrizInversionistas[CI, CM];
 	
 	//  Presento menú de opciones en pantalla
     Repetir
@@ -256,17 +258,17 @@ Proceso InversionesTotales
         Si esNumero Entonces
             Segun ConvertirANumero(opcionTexto) Hacer
                 1:
-                    Inicializa_matrices(CI, CM, matriz_inversiones, matriz_inversionistas);
-                    Presenta_datos_matrices("Inversiones", CI, CM, matriz_inversiones);
-                    Presenta_datos_matrices("Inversionistas", CI, CM, matriz_inversionistas);
+                    InicializaMatrices(CI, CM, matrizInversiones, matrizInversionistas);
+                    PresentaDatosMatrices("Inversiones", CI, CM, matrizInversiones);
+                    PresentaDatosMatrices("Inversionistas", CI, CM, matrizInversionistas);
                     inicializado = Verdadero;
                     Escribir "Matrices inicializadas correctamente. Digite enter para continuar.";
                     Esperar tecla;
                 2:
                     Si inicializado Entonces
-                        Presenta_inversiones_acumuladas_por_mes_por_escolaridad(CI, CM, matriz_inversiones);
-                        Presenta_inversionistas_por_escolaridad_por_mes(CI, CM, matriz_inversionistas);
-                        Presenta_reporte_inversiones_acumuladas_por_escolaridad(CI, CM, matriz_inversiones, matriz_inversionistas);
+                        PresentaInversionesAcumuladasPorMesPorEscolaridad(CI, CM, matrizInversiones);
+                        PresentaInversionistasPorEscolaridadPorMes(CI, CM, matrizInversionistas);
+                        PresentaReporteInversionesAcumuladasPorEscolaridad(CI, CM, matrizInversiones, matrizInversionistas);
                         Escribir "Reporte presentado correctamente. Digite enter para continuar.";
                         Esperar tecla;
                     SiNo
@@ -275,9 +277,9 @@ Proceso InversionesTotales
                     FinSi
                 3:
                     Si inicializado Entonces
-                        Presenta_datos_matrices("Inversiones", CI, CM, matriz_inversiones);
-                        Presenta_datos_matrices("Inversionistas", CI, CM, matriz_inversionistas);
-                        Presenta_datos_meses(CI, CM, matriz_inversiones, matriz_inversionistas);
+                        PresentaDatosMatrices("Inversiones", CI, CM, matrizInversiones);
+                        PresentaDatosMatrices("Inversionistas", CI, CM, matrizInversionistas);
+                        PresentaDatosMeses(CI, CM, matrizInversiones, matrizInversionistas);
                         Escribir "Reporte presentado correctamente. Digite enter para continuar.";
                         Esperar tecla;
                     SiNo
