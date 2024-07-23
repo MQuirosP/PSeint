@@ -11,7 +11,7 @@ Funcion nombreEscolaridad = ObtieneNombreEscolaridad(idNivel)  // recibe un nume
 		6: nombreEscolaridad <- "Maestría         ";
 		7: nombreEscolaridad <- "Doctorado        ";
 		De Otro Modo:
-			nombreEscolaridad <- "Desconocido";
+			nombreEscolaridad <- "Desconocido      ";
 	FinSegun
 FinFuncion
 
@@ -219,7 +219,7 @@ FinSubProceso
 
 // proceso principal que solo se encarga de presentar el menu y procesar segùn la opcion seleccionada por el usuario
 Proceso InversionesTotales
-    Definir CI, CM, i, j, matrizInversiones, matrizInversionistas Como Entero;
+    Definir CI, CM, matrizInversiones, matrizInversionistas Como Entero;
 	//CI = Niveles Escolaridad, CM = Cantidad Meses, i-j = variables para recorridos
     Definir inicializado, esNumero Como Logico; // Flags lógicos para validar paso 1 y si la opción es seleccion valida
     Definir opcionTexto como Cadena;  // Variable para almacenar la selección del usuario
