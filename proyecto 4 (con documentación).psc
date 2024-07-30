@@ -57,9 +57,10 @@ Funcion validarNumero = ValidarEsNumeroValido(opcionTexto)  // recibe una cadena
 	Para i = 0 Hasta Longitud(opcionTexto) Hacer
 		validarNumero = Falso;
 		Para j = 0 Hasta Longitud(digitosPermitidos) Hacer
-			Si Subcadena(opcionTexto, i, j) = Subcadena(digitosPermitidos, j, j) Entonces
+			Si Subcadena(opcionTexto, i, i) = Subcadena(digitosPermitidos, j, j) Entonces
 				validarNumero = Verdadero;
 				j = Longitud(digitosPermitidos); // rompo el bucle interno al alcanzar un valor coincidente
+				i = Longitud(opcionTexto);
 			FinSi
 		FinPara
 		Si No validarNumero Entonces
