@@ -60,10 +60,10 @@ Funcion validarNumero = ValidarEsNumeroValido(opcionTexto)  // recibe una cadena
 			Si Subcadena(opcionTexto, i, i) = Subcadena(digitosPermitidos, j, j) Entonces
 				validarNumero = Verdadero;
 				j = Longitud(digitosPermitidos); // rompo el bucle interno al alcanzar un valor coincidente
-				i = Longitud(opcionTexto);
+				i = Longitud(opcionTexto);       // y no continúe los recorridos
 			FinSi
 		FinPara
-		Si No validarNumero Entonces
+		Si No validarNumero Entonces   // en caso que NO sea un número (letra)
 			i = Longitud(opcionTexto);  // rompo el bucle externo
 		FinSi
 	FinPara
